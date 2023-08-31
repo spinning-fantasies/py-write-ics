@@ -9,14 +9,14 @@ def create_ics_file(csv_file):
         cal = Calendar()
 
         for row in reader:
-            birthdate, name = row[0], row[1]
+            name, birthdate = row[0], row[1]
             event = Event()
 
             # Parse birthdate from the CSV
             birthdate = datetime.strptime(birthdate, '%Y-%m-%d').date()
 
             # Set event details
-            event.add('summary', f'Birthday: {name}')
+            event.add('summary', f'Anniversaire de : {name}')
             event.add('dtstart', birthdate)
             event.add('dtend', birthdate)
 
@@ -40,7 +40,7 @@ def save_ics_file(cal, output_file):
     print(f"ICS file '{output_file}' created successfully!")
 
 if __name__ == '__main__':
-    csv_file = 'data/dates.csv'
+    csv_file = 'data/formatted_dates.csv'
     output_file = 'data/birthdays.ics'
 
     calendar = create_ics_file(csv_file)
